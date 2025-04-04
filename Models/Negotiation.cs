@@ -16,7 +16,7 @@
 
         public int Id { get; set; }
         public int ProductId { get; set; }
-        public string CustomerId { get; set; } = string.Empty;
+        public string CustomerEmail { get; set; } = string.Empty;
         public decimal OfferedPrice { get; set; }
         public int AttemptCount { get; set; } = 1;
         public NegotiationStatus Status { get; set; } = NegotiationStatus.Open;
