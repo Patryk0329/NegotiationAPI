@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NegotiationAPI.Models;
 
@@ -17,6 +18,7 @@ namespace NegotiationAPI.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Product>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<IEnumerable<Product>> GetAllProducts()
         {
             return Ok(_products);
@@ -35,6 +37,7 @@ namespace NegotiationAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(typeof(Product), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<Product> AddProduct([FromBody] CreateProductDto dtoProduct)

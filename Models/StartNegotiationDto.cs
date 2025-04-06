@@ -12,7 +12,7 @@ namespace NegotiationAPI.Models
 
         [Required(ErrorMessage = "Customer email is required")]
         [EmailAddress(ErrorMessage = "Invalid email format")]
-        public string CustomerEmail { get; set; }
+        public string CustomerEmail { get; set; } = string.Empty;
 
     }
 }
