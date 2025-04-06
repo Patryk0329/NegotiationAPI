@@ -27,13 +27,16 @@ namespace NegotiationAPI.Models
         [JsonIgnore]
         public NegotiationStatus Status { get; set; } = NegotiationStatus.Open;
         public DateTime LastOfferDate { get; set; } = DateTime.UtcNow;
-        public DateTime ExpirationDate => LastOfferDate.AddDays(ExpirationDays);
+        public DateTime? RejectionDate { get; set; }
+
+        [JsonIgnore]
+        public DateTime? ExpirationDate => RejectionDate?.AddDays(ExpirationDays);
 
         [JsonPropertyName("EffectiveStatus")]
         public NegotiationStatus EffectiveStatus => GetEffectiveStatus();
         public NegotiationStatus GetEffectiveStatus()
         {
-            if (Status == NegotiationStatus.Open && DateTime.UtcNow > ExpirationDate)
+            if (Status == NegotiationStatus.Rejected && ExpirationDate.HasValue && DateTime.UtcNow > ExpirationDate.Value)
                 return NegotiationStatus.Expired;
 
             return Status;

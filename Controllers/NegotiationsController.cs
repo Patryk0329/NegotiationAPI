@@ -118,6 +118,8 @@ namespace NegotiationAPI.Controllers
             negotiation.Status = NegotiationStatus.Rejected;
             negotiation.RejectionReason = dto.Reason.Trim();
             negotiation.LastOfferDate = DateTime.UtcNow;
+            negotiation.RejectionDate = DateTime.UtcNow;
+
             return NoContent();
         }
 
@@ -149,9 +151,8 @@ namespace NegotiationAPI.Controllers
             if (negotiation.AttemptCount >= Negotiation.MaxAttempts)
                 return BadRequest("Negotiation has reached the maximum number of attempts");
 
-            if (negotiation.ExpirationDate < DateTime.UtcNow)
+            if (negotiation.ExpirationDate.HasValue && negotiation.ExpirationDate.Value < DateTime.UtcNow)
                 return BadRequest("Negotiation has expired");
-
 
             negotiation.Status = NegotiationStatus.Open;
             negotiation.AttemptCount++;
