@@ -9,7 +9,7 @@ A .NET 9 Web API application that implements a price negotiation process for e-c
 - [Authentication](#authentication)
 - [Business Logic](#business-logic)
 - [Validation](#validation)
-- [Testing](#testing)
+- [Testing](#testing) !(in separate repository)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Example API Requests](#example-api-requests)
@@ -45,7 +45,6 @@ The application follows RESTful principles and includes:
 
 ### Security
 - JWT authentication for employee actions
-- Role-based authorization
 - Secure password handling
 
 ## API Endpoints
